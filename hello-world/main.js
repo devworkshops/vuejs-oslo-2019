@@ -46,17 +46,18 @@ var app = new Vue({
       if (this.activeFilter == "Done") return this.todos.filter(t => t.done);
     }
   },
-  created(){
-    this.todos = [
-        { id: 1, title: "New Item", done: false, created: new Date(2019, 1, 1) },
-        {
-          id: 2,
-          title: "New Item 1",
-          done: false,
-          created: new Date(2019, 1, 1)
-        },
-        { id: 3, title: "New Item 2", done: true, created: new Date() },
-        { id: 4, title: "New Item 3", done: false, created: new Date() }
-      ];
+  created() {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then(response => response.json())
+      .then(
+        json =>
+          (this.todos = json.map(t => {
+            return {
+              ...t,
+              done: t.completed,
+              created: new Date()
+            };
+          }))
+      );
   }
 });
