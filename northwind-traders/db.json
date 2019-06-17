@@ -2741,7 +2741,7 @@
   "suppliers": [
     {
       "id": 4,
-      "companyName": "Tokyo Traders [UPDATED]",
+      "companyName": "Tokyo Traders",
       "contactName": "Yoshi Nagase",
       "contactTitle": "Marketing Manager",
       "address": {
@@ -3144,13 +3144,6 @@
         "country": "Canada",
         "phone": "(514) 555-2955"
       }
-    },
-    {
-      "address": {},
-      "companyName": "New Supplier",
-      "contactName": "Thiago",
-      "contactTitle": "Solution Architect",
-      "id": 30
     }
   ],
   "orders": [
