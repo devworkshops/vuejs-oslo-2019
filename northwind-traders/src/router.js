@@ -40,6 +40,22 @@ export default new Router({
       component: () => import("./views/Categories/CategoryList.vue")
     },
     {
+      path: "/products",
+      name: "products",
+      component: () => import("./views/Products/ProductList.vue")
+    },
+    {
+      path: "/products/new",
+      name: "products-new",
+      component: () => import("./views/Products/ProductEdit.vue")
+    },
+    {
+      path: "/products/:id",
+      name: "products-edit",
+      component: () => import("./views/Products/ProductEdit.vue"),
+      props: true
+    },
+    {
       path: "**",
       name: "NotFound",
       component: NotFound

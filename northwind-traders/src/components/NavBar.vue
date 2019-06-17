@@ -14,6 +14,9 @@
         <router-link to="/categories" tag="li" class="nav-item" active-class="active">
           <a class="nav-link">Categories</a>
         </router-link>
+        <router-link to="/products" tag="li" class="nav-item" active-class="active">
+          <a class="nav-link">Products</a>
+        </router-link>
       </ul>
     </b-collapse>
   </b-navbar>
