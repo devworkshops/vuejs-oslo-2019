@@ -9,6 +9,30 @@ Vue.component("remaining-items", {
     `
 });
 
+Vue.component("add-item", {
+  data() {
+    return {
+      newTodo: undefined
+    };
+  },
+  template: `
+  <form @submit.prevent="add" class="mb-2">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Add new item..."
+          v-model="newTodo"
+        />
+      </form>
+  `,
+  methods: {
+    add() {
+      this.$emit("submitted", this.newTodo);
+      this.newTodo = undefined;
+    }
+  }
+});
+
 Vue.filter("friendly-date", date => {
   var diff = new Date() - date;
   if (diff < 1000) return `Just now`;
@@ -23,19 +47,17 @@ var app = new Vue({
     title: "Hello, NDC Oslo",
     todos: [],
     nextTodoId: 5,
-    newTodo: null,
     filters: ["All", "Todo", "Done"],
     activeFilter: "All"
   },
   methods: {
-    add() {
+    add(newTodo) {
       this.todos.push({
         id: this.nextTodoId++,
-        title: this.newTodo,
+        title: newTodo,
         done: false,
         created: new Date()
       });
-      this.newTodo = null;
     }
   },
   computed: {
@@ -49,15 +71,15 @@ var app = new Vue({
   created() {
     fetch("https://jsonplaceholder.typicode.com/todos")
       .then(response => response.json())
-      .then(
-        json =>
-          (this.todos = json.map(t => {
-            return {
-              ...t,
-              done: t.completed,
-              created: new Date()
-            };
-          }))
-      );
+      .then(json => {
+        this.todos = json.map(t => {
+          return {
+            ...t,
+            done: t.completed,
+            created: new Date()
+          };
+        });
+        this.newTodoId = this.todos.length + 1;
+      });
   }
 });

@@ -34,8 +34,8 @@
         <transition-group name="list">
           <li
             class="list-group-item"
-            v-for="todo of filteredTodos"
-            :key="todo.id"
+            v-for="(todo,index) of filteredTodos"
+            :key="index"
           >
             <div class="form-check">
               <input
@@ -56,14 +56,7 @@
           </li>
         </transition-group>
       </ul>
-      <form @submit.prevent="add" class="mb-2">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Add new item..."
-          v-model="newTodo"
-        />
-      </form>
+      <add-item @submitted="add($event)"></add-item>
       <remaining-items :remaining="todos.filter(t=>!t.done).length">
         <template v-slot:danger
           >Run run run</template
