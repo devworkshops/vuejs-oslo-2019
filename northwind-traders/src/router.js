@@ -35,6 +35,11 @@ export default new Router({
       props: true
     },
     {
+      path: "/categories",
+      name: "categories",
+      component: () => import("./views/Categories/CategoryList.vue")
+    },
+    {
       path: "**",
       name: "NotFound",
       component: NotFound
