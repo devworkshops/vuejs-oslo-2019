@@ -41,19 +41,24 @@ export const CategoriesService = {
   }
 };
 export const ProductsService = {
-    getAll() {
-        return apiClient.get('/products')
-    },
-    get(id) {
-        return apiClient.get('/products/' + id)
-    },
-    create(product) {
-        return apiClient.post('/products/', product)
-    },
-    update(product) {
-        return apiClient.put('/products/' + product.id, product)
-    },
-    delete(id) {
-        return apiClient.delete('/products/' + id)
-    }
-}
+  getAll() {
+    return apiClient.get("/products");
+  },
+  get(id) {
+    return apiClient.get("/products/" + id);
+  },
+  create(product) {
+    return apiClient.post("/products/", product);
+  },
+  update(product) {
+    return apiClient.put("/products/" + product.id, product);
+  },
+  delete(id) {
+    return apiClient.delete("/products/" + id);
+  },
+  isUniqueProductName(name) {
+    return apiClient
+      .get(`/products?name=${name}`)
+      .then(result => result.data.length == 0);
+  }
+};
