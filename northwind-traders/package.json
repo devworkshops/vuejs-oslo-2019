@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "mock-api": "json-server db.json --watch"
+    "mock-api": "json-server db.json --watch",
+    "json-server-auth": "node auth-json-server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
@@ -15,6 +16,7 @@
     "bootstrap-vue": "^2.0.0-rc.23",
     "core-js": "^2.6.5",
     "json-server": "^0.15.0",
+    "jsonwebtoken": "^8.5.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuelidate": "^0.7.4"
