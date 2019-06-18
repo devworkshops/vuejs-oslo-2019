@@ -21,6 +21,10 @@
           <a class="nav-link">About</a>
         </router-link>
         <b-nav-item @click="logout()"><i class="fas fa-sign-out-alt"></i> Logout</b-nav-item>
+        <b-nav-item
+            v-b-toggle.collapseNotifications>Notifications
+            <b-badge>{{$store.getters.notificationCount}}</b-badge>
+        </b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="mr-auto" v-else>
         <router-link to="/login" tag="li" class="nav-item" active-class="active">

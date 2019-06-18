@@ -4,20 +4,30 @@
       <nav-bar :user="auth.currentUser"></nav-bar>
     </header>
 
-    <div class="container">
-      <div class="row">
-        <div class="col">
+    <b-container>
+      <b-row>
+        <b-col>
           <main role="main" class="flex-shrink-0">
             <div class="container">
               <router-view/>
             </div>
           </main>
-        </div>
-      </div>
-    </div>
+        </b-col>
+        <b-collapse id="collapseNotifications" class="border-left pl-2">
+          <b-col>
+            <notification-panel></notification-panel>
+          </b-col>
+        </b-collapse>
+      </b-row>
+    </b-container>
     <footer class="footer mt-auto py-3">
       <div class="container">
-        <span class="text-muted">Northwind Traders &copy;</span>
+        <span class="text-muted">
+          Northwind Traders &copy;
+          | Build: {{release.build}}
+          | Environment: {{release.environment}}
+          | Failed Health Checks: {{failedHealthChecks}}
+        </span>
       </div>
     </footer>
   </div>
@@ -25,7 +35,9 @@
 
 <script>
 import NavBar from "./components/NavBar.vue";
+import NotificationPanel from "./components/NotificationPanel.vue";
 import { AuthService } from "@/services/NorthwindService.js";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "app",
@@ -35,11 +47,16 @@ export default {
     };
   },
   components: {
-    NavBar
+    NavBar,
+    NotificationPanel
   },
   created() {
     this.auth = AuthService;
     AuthService.token();
+  },
+  computed: {
+    ...mapState(["release", "healthChecks"]),
+    ...mapGetters(["failedHealthChecks"])
   }
 };
 </script>
@@ -67,5 +84,9 @@ main > .container {
 .footer > .container {
   padding-right: 15px;
   padding-left: 15px;
+}
+
+#collapseNotifications {
+  width: 30%;
 }
 </style>

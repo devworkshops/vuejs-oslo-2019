@@ -4,7 +4,7 @@ import router from "../router.js";
 
 const apiClient = axios.create({
   baseURL: `//localhost:3000`,
-  timeout: 1000,
+  // timeout: 1000,
   withCredentials: false, // This is the default
   headers: {
     Accept: "application/json",
