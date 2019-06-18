@@ -11,7 +11,7 @@
         <i class="fas fa-plus"></i>
       </router-link>
     </div>
-    <b-table :items="suppliers" :fields="fields">
+    <b-table :items="$store.state.supplier.suppliers" :fields="fields">
       <template slot="actions" slot-scope="data">
         <router-link
           tag="button"
@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import { SuppliersService } from "@/services/NorthwindService.js";
 
 export default {
   data() {
@@ -36,9 +35,7 @@ export default {
     };
   },
   created() {
-    SuppliersService.getAll()
-      .then(r => (this.suppliers = r.data))
-      .catch(err => console.log(err));
+    this.$store.dispatch('fetchSuppliers')
   }
 };
 </script>

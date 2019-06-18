@@ -53,6 +53,7 @@ export default {
   created() {
     this.auth = AuthService;
     AuthService.token();
+    this.$store.dispatch("readInitialStateFromLocalStorage");
   },
   computed: {
     ...mapState(["release", "healthChecks"]),

@@ -11,13 +11,20 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "nprogress/nprogress.css";
-import store from './store'
+import store from "./store/index.js";
 
 Vue.use(BootstrapVue);
 Vue.component("InvalidFeedback", InvalidFeedback);
 Vue.component("BaseInput", BaseInput);
 
 Vue.config.productionTip = false;
+
+router.beforeEach((to, from, next) => {
+  if (from.name) {
+    store.dispatch("StoreInLocalStorage");
+  }
+  next();
+});
 
 new Vue({
   router,
