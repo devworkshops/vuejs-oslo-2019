@@ -4,7 +4,7 @@
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
-      <ul class="navbar-nav mr-auto">
+      <b-navbar-nav class="mr-auto">
         <router-link to="/" tag="li" :exact="true" class="nav-item" active-class="active">
           <a class="nav-link">Home</a>
         </router-link>
@@ -17,7 +17,10 @@
         <router-link to="/products" tag="li" class="nav-item" active-class="active">
           <a class="nav-link">Products</a>
         </router-link>
-      </ul>
+        <router-link to="/about" tag="li" class="nav-item" active-class="active">
+          <a class="nav-link">About</a>
+        </router-link>
+      </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </template>
