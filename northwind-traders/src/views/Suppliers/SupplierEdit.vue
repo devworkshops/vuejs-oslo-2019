@@ -4,7 +4,11 @@
     <form class="form">
       <div class="form-group">
         <label class="form-label">Company Name</label>
-        <input class="form-control" type="text" id="companyNameField" v-model="model.companyName">
+        <input class="form-control" type="text" id="companyNameField" 
+        v-model="model.companyName" :class="{'is-invalid':errors && errors.companyName}">
+        <div class="invalid-feedback" v-if="errors && errors.companyName">
+          {{errors.companyName}}
+        </div>
       </div>
       <div class="form-group">
         <label class="form-label">Contact Name</label>
@@ -17,7 +21,7 @@
     </form>
     <p>
       <!-- <router-link class="btn btn-primary" to="/suppliers">Save</router-link> -->
-      <button class="btn btn-primary" @click="save()" id="saveButton">Save</button>
+      <button class="btn btn-primary" @click.prevent="save()" id="saveButton">Save</button>
       <router-link class="btn" to="/suppliers">Cancel</router-link>
     </p>
   </div>
@@ -33,7 +37,8 @@ export default {
   },
   data() {
     return {
-      model: Object
+      model: Object,
+      errors: null
     };
   },
   methods: {
@@ -41,7 +46,11 @@ export default {
       if (this.id) {
         SuppliersService.update(this.model)
           .then(() => this.navigateBack())
-          .catch(err => console.log(err));
+          .catch(err => {
+            if (err.response.status == 422) {
+              this.errors = err.response.data.errors;
+            }
+          });
       } else {
         SuppliersService.create(this.model)
           .then(() => this.navigateBack())
