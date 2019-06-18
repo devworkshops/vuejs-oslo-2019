@@ -17,7 +17,7 @@
     </form>
     <p>
       <!-- <router-link class="btn btn-primary" to="/suppliers">Save</router-link> -->
-      <button class="btn btn-primary" @click="save()">Save</button>
+      <button class="btn btn-primary" @click="save()" id="saveButton">Save</button>
       <router-link class="btn" to="/suppliers">Cancel</router-link>
     </p>
   </div>
